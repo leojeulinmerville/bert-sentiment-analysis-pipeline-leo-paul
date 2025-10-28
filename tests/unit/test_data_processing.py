@@ -19,3 +19,11 @@ def test_prepare_splits_stratified():
     Xtr, Xval, ytr, yval = prepare_splits(df, test_size=0.33, random_state=0)
     assert len(Xtr) + len(Xval) == len(df)
     assert set(ytr + yval).issubset({0,1,2})
+
+from src.data_processing import build_tokenizer, tokenize_texts
+
+def test_tokenizer_shapes():
+    tok = build_tokenizer()
+    batch = tokenize_texts(tok, ["a good app", "bad update"])
+    assert "input_ids" in batch
+    assert batch["input_ids"].shape[0] == 2

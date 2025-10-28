@@ -1,6 +1,7 @@
 import re
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from transformers import AutoTokenizer
 
 def map_score_to_label(score: int) -> int:
     """
@@ -47,3 +48,17 @@ def prepare_splits(df: pd.DataFrame, test_size: float = 0.2, random_state: int =
     )
 
     return X_tr.tolist(), X_val.tolist(), y_tr.tolist(), y_val.tolist()
+
+def build_tokenizer(name: str = "bert-base-uncased"):
+    """Return a Hugging Face tokenizer for BERT."""
+    return AutoTokenizer.from_pretrained(name)
+
+def tokenize_texts(tokenizer, texts, max_length: int = 128):
+    """Tokenize a list of strings for BERT (padded/truncated)."""
+    return tokenizer(
+        texts,
+        padding=True,
+        truncation=True,
+        max_length=max_length,
+        return_tensors="pt"
+    )
