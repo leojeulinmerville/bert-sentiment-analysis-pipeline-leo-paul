@@ -3,6 +3,26 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# 🧪 Jupyter Notebooks
+.ipynb_checkpoints/
+
+# 📊 Données
+*.csv
+*.tsv
+*.json
+*.xlsx
+*.xls
+*.db
+*.pkl
+*.h5
+*.npy
+*.npz
+*.parquet
+*.feather
+*.txt
+*.pdf
+
+
 # C extensions
 *.so
 
