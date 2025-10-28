@@ -101,23 +101,7 @@ Report coverage results
 
 Prevent merge if tests fail
 
-📁 Project Structure (planned)
-bert-sentiment-analysis-pipeline-leo-paul/
-│
-├── data_extraction.py
-├── data_processing.py
-├── model.py
-├── inference.py
-│
-├── tests/
-│   └── unit/
-│       ├── test_data_extraction.py
-│       ├── test_data_processing.py
-│       ├── test_model.py
-│       └── test_inference.py
-│
-├── requirements.txt
-└── README.md
+<img width="718" height="703" alt="image" src="https://github.com/user-attachments/assets/94efa650-db3e-43c0-a217-092873527040" />
 
 🧾 Deliverables
 
