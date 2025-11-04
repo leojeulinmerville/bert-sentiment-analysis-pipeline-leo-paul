@@ -1,4 +1,4 @@
-# 🧠 Collaborative Sentiment Analysis Pipeline — Final Report
+﻿# 🧠 Collaborative Sentiment Analysis Pipeline — Final Report
 
 **Authors**  
 - Léo Merville (Student 1)  
@@ -145,7 +145,7 @@ Modular pipeline from extraction to inference
 
 100% of tests passed
 
-Collaborative workflow (Trello + GitHub & Discord)
+Collaborative workflow (Trello + GitHub)
 
 CI/CD setup
 
@@ -158,10 +158,8 @@ Add confusion matrix visualization
 Serve inference via FastAPI endpoint
 
 11. Deliverables Summary
-12. 
 Deliverable	Status
-GitHub repository (public):
-https://github.com/leojeulinmerville/bert-sentiment-analysis-pipeline-leo-paul
+GitHub repository (public): https://github.com/leojeulinmerville/bert-sentiment-analysis-pipeline-leo-paul
 
 README.md	:Complete
 Unit & Integration Tests	:10 passed
