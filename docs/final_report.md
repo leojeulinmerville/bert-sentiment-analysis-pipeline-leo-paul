@@ -108,7 +108,29 @@ Tokenization
 Chronogram
 <img width="2137" height="1439" alt="Capture d&#39;écran 2025-11-04 142143" src="https://github.com/user-attachments/assets/f914b58e-1faa-4820-8661-1bebab8e1118" />
 
+### 6.1 Pull Requests & Code Reviews
+
+Throughout the project, every new feature or module was developed on a separate branch  
+and merged into `main` only after **peer review** and **successful CI tests**.
+
+#### Summary of Main PRs
+
+| PR # | Title | Author | Reviewer | Description | Status |
+|------|--------|---------|-----------|--------------|---------|
+| #3 | `ci: add GitHub Actions pytest workflow` | Léo | Paul | Setup of continuous integration to auto-run Pytest | ✅ Merged |
+| #4 | `feat(processing): cleaning, label mapping, stratified split + unit tests` | Léo | Paul | Added preprocessing module and tests | ✅ Merged |
+| #5 | `feature/data processing tokenizer` | Léo | Paul | Implemented tokenizer & PR review from Student 2 | ✅ Merged |
+| #6 | `feat(model): model training + inference scripts` | Paul | Léo | Added model fine-tuning & inference modules | ✅ Merged |
+| #7 | `test: add end-to-end pipeline test` | Léo | Paul | Full pipeline integration test (E2E) | ✅ Merged |
+   #### Direct PR Links
+- [#3 – CI Workflow](https://github.com/leojeulinmerville/bert-sentiment-analysis-pipeline-leo-paul/pull/3)
+- [#4 – Data Processing Cleaning](https://github.com/leojeulinmerville/bert-sentiment-analysis-pipeline-leo-paul/pull/4)
+- [#5 – Tokenizer](https://github.com/leojeulinmerville/bert-sentiment-analysis-pipeline-leo-paul/pull/5)
+- [#6 – Model + Inference](https://github.com/leojeulinmerville/bert-sentiment-analysis-pipeline-leo-paul/pull/6)
+- [#7 – Integration Test](https://github.com/leojeulinmerville/bert-sentiment-analysis-pipeline-leo-paul/pull/7)
+
 7. Communication
+
 
 Team communication took place on Discord, including:
 
