@@ -6,8 +6,13 @@ def load_model(model_path="./model_out", name="bert-base-uncased"):
     """Load fine-tuned BERT model and tokenizer; fallback to base model if directory is missing."""
     tokenizer = AutoTokenizer.from_pretrained(name)
     path = Path(model_path)
-    if path.exists():
-        model = AutoModelForSequenceClassification.from_pretrained(path)
+    config_ok = (path / "config.json").exists()
+    weights_ok = (path / "pytorch_model.bin").exists() or (path / "model.safetensors").exists()
+    if path.exists() and config_ok and weights_ok:
+        try:
+            model = AutoModelForSequenceClassification.from_pretrained(path)
+        except Exception:
+            model = AutoModelForSequenceClassification.from_pretrained(name)
     else:
         model = AutoModelForSequenceClassification.from_pretrained(name)
     return tokenizer, model

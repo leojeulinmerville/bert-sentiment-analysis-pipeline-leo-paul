@@ -142,3 +142,23 @@ docker run --rm \
 - Entry point: `python -m src.cli`
 - Model cache: `/app/.cache/huggingface` (inside container)
 - Fine-tuned model path expected at `/app/model_out` (use a volume for persistence)
+
+## Docker Compose (C03)
+
+Bring up the app with predefined volumes:
+```bash
+docker compose up bert_app
+```
+
+Override text at runtime:
+```bash
+docker compose run --rm bert_app --text "This is awesome!"
+```
+
+Services:
+- `bert_app`: builds a local image, uses volumes for model/logs/HF cache, falls back to base model if `model_out` is empty
+
+Volumes:
+- `model_out` -> `/app/model_out`
+- `logs` -> `/app/logs`
+- `hf_cache` -> `/app/.cache/huggingface`
