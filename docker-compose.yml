@@ -1,0 +1,16 @@
+services:
+  bert_app:
+    build: .
+    image: bert-sentiment-cli:local
+    environment:
+      - HF_HOME=/app/.cache/huggingface
+    volumes:
+      - model_out:/app/model_out
+      - logs:/app/logs
+      - hf_cache:/app/.cache/huggingface
+    command: ["--text", "Compose run: great product!"]
+
+volumes:
+  model_out:
+  logs:
+  hf_cache:
