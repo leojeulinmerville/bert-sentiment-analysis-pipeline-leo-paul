@@ -162,3 +162,19 @@ Volumes:
 - `model_out` -> `/app/model_out`
 - `logs` -> `/app/logs`
 - `hf_cache` -> `/app/.cache/huggingface`
+
+## CI/CD (C04)
+
+GitHub Actions workflows:
+- `test.yml`: runs pytest on pushes/PRs.
+- `evaluate.yml`: runs `python scripts/evaluate.py` (F1 macro >= 0.85) and uploads `evaluation_metrics.json`.
+- `build.yml`: on push to `main`, runs tests + eval then builds and pushes Docker image to Docker Hub.
+
+Docker Hub:
+- Repository: `leo0679/bert-sentiment`
+- Secrets required: `DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN`
+
+Evaluation details:
+- Uses `scripts/evaluate.py` on `dataset.csv`
+- Threshold: F1 macro >= 0.85 (fails workflow otherwise)
+- If no fine-tuned weights in `model_out`, falls back to baseline label mapping
