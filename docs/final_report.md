@@ -190,3 +190,64 @@ Discord Communication Proof	:Included
 Final Report	:This document
 
 <img width="870" height="1353" alt="Capture d&#39;écran 2025-11-04 143114" src="https://github.com/user-attachments/assets/730656dd-689b-4de0-9d96-54285b7f575d" />
+
+---
+
+# Part 2 – MLOps (Docker, Compose, CI/CD)
+
+## Repository & Image
+- Repo: https://github.com/leojeulinmerville/bert-sentiment-analysis-pipeline-leo-paul
+- Docker Hub: `leo0679/bert-sentiment`
+- Students: student_1 (dev) `leojeulinmerville`; student_2 (review) `derfoj`
+
+## C01 – Dockerfile
+- Base: `python:3.11-slim`, `WORKDIR /app`, `PYTHONUNBUFFERED=1`, HF cache at `/app/.cache/huggingface`.
+- Installs `requirements.txt`, copies `src/` and `dataset.csv`.
+- Entrypoint: `python -m src.cli` (e.g., `--text "Hello"`).
+- Local test: `docker build -t bert-sentiment-cli .` then `docker run --rm bert-sentiment-cli --text "I love this app!"`.
+
+## C02 – Volumes
+- Persistent dirs created: `/app/model_out`, `/app/logs`, optional `/app/.cache/huggingface`.
+- Named volume example:
+  - `docker run --rm -v bert_model_out:/app/model_out -v bert_logs:/app/logs bert-sentiment-cli --text "Great product!"`
+- Bind mounts:
+  - `docker run --rm -v /abs/path/model_out:/app/model_out -v /abs/path/logs:/app/logs bert-sentiment-cli --text "Great product!"`
+
+## C03 – Docker Compose
+- `docker-compose.yml` service `bert_app` builds local image, mounts `model_out`, `logs`, `hf_cache`, sets `HF_HOME`.
+- Commands:
+  - `docker compose up bert_app`
+  - `docker compose run --rm bert_app --text "Compose check"`
+- Inference falls back to base model if mounted `model_out` is empty/invalid.
+
+## C04 – CI/CD (GitHub Actions)
+- `test.yml`: runs `pytest -v` on push/PR.
+- `evaluate.yml`: runs `python scripts/evaluate.py --threshold 0.85` (F1 macro >= 0.85) and uploads `evaluation_metrics.json`; sets `PYTHONPATH` to repo root.
+- `build.yml`: on push to `main`, runs tests + eval, then builds/pushes Docker image to `leo0679/bert-sentiment` (tags: `latest`, `${{ github.sha }}`) using `docker/login-action@v3` and GHA cache.
+- Secrets required: `DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN` (write scope).
+
+## Evaluation Script
+- `scripts/evaluate.py`: loads `dataset.csv`, maps scores to labels, uses fine-tuned model if present (`model_out` with config + weights), otherwise baseline label mapping. Computes F1 macro; fails if < 0.85; saves metrics to `evaluation_metrics.json`.
+
+## Evidence to Capture (screenshots)
+- GitHub Actions: green runs for `test`, `evaluate`, `build-and-push`.
+- Docker Hub: repo `leo0679/bert-sentiment` showing tags (`latest`, SHA).
+- PRs: merged #9 (C01), #10 (C02), #11 (C03), #12 (C04) with approvals.
+- Local run: `docker run --rm bert-sentiment-cli --text "It works!"` showing predicted label.
+- Optional: `docker compose run --rm bert_app --text "Compose check"`.
+
+## How to Run (summary)
+```bash
+# Build and run CLI
+docker build -t bert-sentiment-cli .
+docker run --rm bert-sentiment-cli --text "I love this app!"
+
+# With volumes
+docker run --rm \
+  -v bert_model_out:/app/model_out \
+  -v bert_logs:/app/logs \
+  bert-sentiment-cli --text "Great product!"
+
+# Compose
+docker compose run --rm bert_app --text "Compose check"
+```
