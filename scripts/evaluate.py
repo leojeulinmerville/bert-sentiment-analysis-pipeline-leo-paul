@@ -1,6 +1,10 @@
 import argparse
 import json
+import sys
 from pathlib import Path
+
+# Ensure project root is on sys.path so `src` imports work in CI runners.
+sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 import pandas as pd
 from sklearn.metrics import classification_report, f1_score
