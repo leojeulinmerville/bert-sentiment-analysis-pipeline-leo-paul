@@ -230,11 +230,25 @@ Final Report	:This document
 - `scripts/evaluate.py`: loads `dataset.csv`, maps scores to labels, uses fine-tuned model if present (`model_out` with config + weights), otherwise baseline label mapping. Computes F1 macro; fails if < 0.85; saves metrics to `evaluation_metrics.json`.
 
 ## Evidence to Capture (screenshots)
-- GitHub Actions: green runs for `test`, `evaluate`, `build-and-push`.
-- Docker Hub: repo `leo0679/bert-sentiment` showing tags (`latest`, SHA).
+<img width="3199" height="1088" alt="image" src="https://github.com/user-attachments/assets/67696299-5230-4f99-be19-5953708fee01" />
+<img width="3194" height="1447" alt="image" src="https://github.com/user-attachments/assets/0d30724e-f775-4250-964c-606cbcddc3a3" />
+<img width="3199" height="1582" alt="image" src="https://github.com/user-attachments/assets/73d2ac23-77ed-40da-ba72-289315d3b049" />
+
+<img width="2633" height="1402" alt="image" src="https://github.com/user-attachments/assets/f079a1e0-e4fc-4ffb-af4a-7c1c5ceef89e" />
+
 - PRs: merged #9 (C01), #10 (C02), #11 (C03), #12 (C04) with approvals.
-- Local run: `docker run --rm bert-sentiment-cli --text "It works!"` showing predicted label.
-- Optional: `docker compose run --rm bert_app --text "Compose check"`.
+  ![WhatsApp Image 2025-12-09 à 17 12 46_73b293fb](https://github.com/user-attachments/assets/4afa220a-def6-4853-b85e-7ea6a9ed10ae)
+
+![WhatsApp Image 2025-12-09 à 17 12 47_dd362c75](https://github.com/user-attachments/assets/b64582e5-ec45-461c-a8c8-ae8b4064bb57)
+
+![WhatsApp Image 2025-12-09 à 17 12 46_36a8fc76](https://github.com/user-attachments/assets/52cfc7a9-77fe-4247-97af-4177205578d3)
+
+![WhatsApp Image 2025-12-09 à 17 12 47_785e6c13](https://github.com/user-attachments/assets/aca909fe-680e-45ee-840a-c72d6c81bfb0)
+
+![WhatsApp Image 2025-12-09 à 17 12 47_ed59e04c](https://github.com/user-attachments/assets/a922eaa9-c298-40fc-a4ad-7eeb709ab5bf)
+
+![WhatsApp Image 2025-12-09 à 17 12 17_13b94405](https://github.com/user-attachments/assets/ba3b8955-f713-4bb4-8142-f969f94f71fa)
+
 
 ## How to Run (summary)
 ```bash
