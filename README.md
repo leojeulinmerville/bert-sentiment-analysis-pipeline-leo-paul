@@ -118,6 +118,26 @@ docker run --rm bert-sentiment-cli --text "I love this app!"
 docker run --rm -v /path/to/model_out:/app/model_out bert-sentiment-cli --text "I love this app!"
 ```
 
+### Volumes (C02)
+- Persist fine-tuned weights: `-v bert_model_out:/app/model_out` (or bind a host path)
+- Persist logs: `-v bert_logs:/app/logs`
+- Optional HF cache: `-v bert_hf_cache:/app/.cache/huggingface`
+
+Examples:
+```bash
+# Named volumes
+docker run --rm \
+  -v bert_model_out:/app/model_out \
+  -v bert_logs:/app/logs \
+  bert-sentiment-cli --text "Great product!"
+
+# Bind mount host directories
+docker run --rm \
+  -v /abs/path/model_out:/app/model_out \
+  -v /abs/path/logs:/app/logs \
+  bert-sentiment-cli --text "Great product!"
+```
+
 ### Notes
 - Entry point: `python -m src.cli`
 - Model cache: `/app/.cache/huggingface` (inside container)
