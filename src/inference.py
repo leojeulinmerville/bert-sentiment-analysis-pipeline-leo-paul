@@ -1,10 +1,15 @@
 import torch
+from pathlib import Path
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 def load_model(model_path="./model_out", name="bert-base-uncased"):
-    """Load fine-tuned BERT model and tokenizer."""
+    """Load fine-tuned BERT model and tokenizer; fallback to base model if directory is missing."""
     tokenizer = AutoTokenizer.from_pretrained(name)
-    model = AutoModelForSequenceClassification.from_pretrained(model_path)
+    path = Path(model_path)
+    if path.exists():
+        model = AutoModelForSequenceClassification.from_pretrained(path)
+    else:
+        model = AutoModelForSequenceClassification.from_pretrained(name)
     return tokenizer, model
 
 def predict_sentiment(text, tokenizer, model):
