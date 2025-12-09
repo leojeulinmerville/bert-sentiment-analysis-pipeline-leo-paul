@@ -178,3 +178,19 @@ Evaluation details:
 - Uses `scripts/evaluate.py` on `dataset.csv`
 - Threshold: F1 macro >= 0.85 (fails workflow otherwise)
 - If no fine-tuned weights in `model_out`, falls back to baseline label mapping
+
+## Quick commands
+```bash
+# Build and run CLI
+docker build -t bert-sentiment-cli .
+docker run --rm bert-sentiment-cli --text "I love this app!"
+
+# With volumes (model/logs)
+docker run --rm \
+  -v bert_model_out:/app/model_out \
+  -v bert_logs:/app/logs \
+  bert-sentiment-cli --text "Great product!"
+
+# Compose
+docker compose run --rm bert_app --text "Compose check"
+```
